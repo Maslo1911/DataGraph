@@ -3,8 +3,9 @@
 
 #include <QApplication>
 #include <QMainWindow>
-#include <QVBoxLayout>
 #include <QWidget>
+#include <QPushButton>
+#include <QInputDialog>
 #include "qcustomplot.h"
 
 QT_BEGIN_NAMESPACE
@@ -18,13 +19,14 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    QVector<double> x, y;
-    QColor color = QColor::fromHsv(rand() % 255, 255, 255);
+    QVector<double> xData;
+    QVector<double> yData;
 
 private slots:
-    void on_pushButton_clicked();
+    void on_addPoint_clicked();
 
 private:
+    QCustomPlot *customPlot;
     Ui::MainWindow *ui;
 };
 #endif // MAINWINDOW_H
