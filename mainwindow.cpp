@@ -6,7 +6,6 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    // Добавление графика
     customPlot = ui->widget;
     customPlot->addGraph();
 
@@ -40,8 +39,8 @@ void MainWindow::on_addPoint_clicked()
 
     // Итерация по контейнеру
     for (auto it = dataContainer->constBegin(); it != dataContainer->constEnd(); ++it) {
-        xData.append(it->key);   // Добавляем x-координату
-        yData.append(it->value); // Добавляем y-координату
+        xData.append(it->key);
+        yData.append(it->value);
     }
 
     // Добавление новой точки
