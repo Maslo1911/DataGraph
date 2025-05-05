@@ -83,7 +83,7 @@ void MainWindow::on_verticalAxis_triggered()
     bool ok;
     QString verticalAxisText = QInputDialog::getText(this, "Переименовать вертикальную ось", "Введите название:", QLineEdit::Normal, customPlot->yAxis->label(), &ok);
     if (!ok) return;
-    customPlot->xAxis->setLabel(verticalAxisText);
+    customPlot->yAxis->setLabel(verticalAxisText);
     customPlot->replot();
 }
 
