@@ -19,14 +19,25 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    QVector<double> xData;
-    QVector<double> yData;
 
 private slots:
+    void onSelectionChanged();
+
     void on_addPoint_clicked();
 
+    void on_deletePoint_clicked();
+
+    void on_horizontalAxis_triggered();
+
+    void on_verticalAxis_triggered();
+
+    void on_changePoint_clicked();
+
 private:
+    QCPScatterStyle myScatter;
     QCustomPlot *customPlot;
     Ui::MainWindow *ui;
+    QVector<double> xData;
+    QVector<double> yData;
 };
 #endif // MAINWINDOW_H
