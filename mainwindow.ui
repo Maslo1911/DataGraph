@@ -40,6 +40,9 @@
     </item>
     <item row="1" column="2">
      <widget class="QPushButton" name="deletePoint">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="text">
        <string>Удалить точку</string>
       </property>
@@ -63,10 +66,14 @@
      <height>20</height>
     </rect>
    </property>
-   <widget class="QMenu" name="fileMenu">
+   <widget class="QMenu" name="mainMenu">
     <property name="title">
-     <string>Файл</string>
+     <string>Меню</string>
     </property>
+    <addaction name="newAction"/>
+    <addaction name="openAction"/>
+    <addaction name="saveAction"/>
+    <addaction name="exportAction"/>
    </widget>
    <widget class="QMenu" name="axesMenu">
     <property name="title">
@@ -75,7 +82,7 @@
     <addaction name="horizontalAxis"/>
     <addaction name="verticalAxis"/>
    </widget>
-   <addaction name="fileMenu"/>
+   <addaction name="mainMenu"/>
    <addaction name="axesMenu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -87,6 +94,26 @@
   <action name="verticalAxis">
    <property name="text">
     <string>Переименовать по вертикали</string>
+   </property>
+  </action>
+  <action name="newAction">
+   <property name="text">
+    <string>Создать</string>
+   </property>
+  </action>
+  <action name="openAction">
+   <property name="text">
+    <string>Открыть</string>
+   </property>
+  </action>
+  <action name="saveAction">
+   <property name="text">
+    <string>Сохранить</string>
+   </property>
+  </action>
+  <action name="exportAction">
+   <property name="text">
+    <string>Экспорт</string>
    </property>
   </action>
  </widget>

@@ -6,6 +6,9 @@
 #include <QWidget>
 #include <QPushButton>
 #include <QInputDialog>
+#include <QFileDialog>
+#include <QFile>
+#include <QTextStream>
 #include "qcustomplot.h"
 
 QT_BEGIN_NAMESPACE
@@ -33,11 +36,18 @@ private slots:
 
     void on_changePoint_clicked();
 
+    void exportGraph();
+
+    void on_saveAction_triggered();
+
+    void on_openAction_triggered();
+
 private:
     QCPScatterStyle myScatter;
     QCustomPlot *customPlot;
     Ui::MainWindow *ui;
-    QVector<double> xData;
-    QVector<double> yData;
+    int selectedIndex;
+    void saveData(const QString &fileName, const QVector<double> &xData, const QVector<double> &yData);
+    void loadData(const QString &fileName);
 };
 #endif // MAINWINDOW_H
