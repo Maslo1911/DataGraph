@@ -200,3 +200,36 @@ void MainWindow::saveData(const QString &fileName, const QVector<double> &xData,
         file.close();
     }
 }
+
+void MainWindow::on_newAction_triggered()
+{
+    bool isChanged = true;
+    if (customPlot->graph(0)->data().data()->size() == 0)
+        isChanged = false;
+    if (isChanged)
+    {
+        QMessageBox msgBox;
+        msgBox.setIcon(QMessageBox::Warning);
+        msgBox.setText("Документ был изменён.");
+        msgBox.setInformativeText("Хотите сохранить изменения?");
+        msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+        msgBox.setDefaultButton(QMessageBox::Save);
+        int ret = msgBox.exec();
+        switch (ret) {
+        case QMessageBox::Save:
+            on_saveAction_triggered();
+            break;
+        case QMessageBox::Discard:
+            customPlot->graph(0)->data().data()->clear();
+            customPlot->replot();
+            break;
+        case QMessageBox::Cancel:
+
+            break;
+        default:
+            on_saveAction_triggered();
+            break;
+        }
+    }
+}
+

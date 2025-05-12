@@ -42,6 +42,8 @@ private slots:
 
     void on_openAction_triggered();
 
+    void on_newAction_triggered();
+
 private:
     QCPScatterStyle myScatter;
     QCustomPlot *customPlot;
