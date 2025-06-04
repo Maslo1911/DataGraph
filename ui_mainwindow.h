@@ -10,7 +10,7 @@
 #define UI_MAINWINDOW_H
 
 #include <QtCore/QVariant>
-#include <QAction>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QLabel>

@@ -47,6 +47,7 @@ private slots:
 private:
     QCPScatterStyle myScatter;
     QCustomPlot *customPlot;
+    bool isChanged;
     Ui::MainWindow *ui;
     int selectedIndex;
     void saveData(const QString &fileName, const QVector<double> &xData, const QVector<double> &yData);

@@ -67,6 +67,7 @@ void MainWindow::on_addPoint_clicked()
     yData.append(y);
     customPlot->graph(0)->setData(xData, yData);
     customPlot->replot();
+    isChanged = true;
 }
 
 
@@ -83,6 +84,7 @@ void MainWindow::on_deletePoint_clicked()
         customPlot->graph(0)->data()->remove(it->key);
     }
     customPlot->replot();
+    isChanged = true;
 }
 
 
@@ -120,8 +122,8 @@ void MainWindow::onSelectionChanged()
     for (int i = 0; i < selectedIndex && it != dataContainer->constEnd(); ++i, ++it);
 
     if (it != dataContainer->constEnd()) {
-        double x = it->key;
-        double y = it->value;
+        double x = it->value;
+        double y = it->key;
         ui->selectedPointX->setText(QString("%1").arg(x));
         ui->selectedPointY->setText(QString("%1").arg(y));
     }
@@ -135,8 +137,8 @@ void MainWindow::on_changePoint_clicked()
     auto dataContainer = customPlot->graph(0)->data();
     QVector<double> xData, yData;
     for (auto it = dataContainer->constBegin(); it != dataContainer->constEnd(); ++it) {
-        xData.append(it->key);
-        yData.append(it->value);
+        xData.append(it->value);
+        yData.append(it->key);
     }
 
     int selectedIndex = selection.dataRange().begin();
@@ -147,6 +149,7 @@ void MainWindow::on_changePoint_clicked()
     customPlot->graph(0)->data().clear();
     customPlot->graph(0)->setData(xData, yData);
     customPlot->replot();
+    isChanged = true;
 }
 
 void MainWindow::on_saveAction_triggered()
@@ -199,13 +202,11 @@ void MainWindow::saveData(const QString &fileName, const QVector<double> &xData,
         }
         file.close();
     }
+    isChanged = false;
 }
 
 void MainWindow::on_newAction_triggered()
 {
-    bool isChanged = true;
-    if (customPlot->graph(0)->data().data()->size() == 0)
-        isChanged = false;
     if (isChanged)
     {
         QMessageBox msgBox;
@@ -218,6 +219,8 @@ void MainWindow::on_newAction_triggered()
         switch (ret) {
         case QMessageBox::Save:
             on_saveAction_triggered();
+            customPlot->graph(0)->data().data()->clear();
+            customPlot->replot();
             break;
         case QMessageBox::Discard:
             customPlot->graph(0)->data().data()->clear();
@@ -228,8 +231,14 @@ void MainWindow::on_newAction_triggered()
             break;
         default:
             on_saveAction_triggered();
+            customPlot->graph(0)->data().data()->clear();
+            customPlot->replot();
             break;
         }
+    }
+    else {
+        customPlot->graph(0)->data().data()->clear();
+        customPlot->replot();
     }
 }
 
