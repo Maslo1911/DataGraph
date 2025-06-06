@@ -147,7 +147,7 @@ void MainWindow::on_changePoint_clicked()
             yData[selectedIndex] = newY;
         }
     customPlot->graph(0)->data().clear();
-    customPlot->graph(0)->setData(xData, yData);
+    customPlot->graph(0)->setData(yData, xData);
     customPlot->replot();
     isChanged = true;
 }
@@ -159,8 +159,8 @@ void MainWindow::on_saveAction_triggered()
     auto dataContainer = customPlot->graph(0)->data();
     QVector<double> xData, yData;
     for (auto it = dataContainer->constBegin(); it != dataContainer->constEnd(); ++it) {
-        xData.append(it->key);
-        yData.append(it->value);
+        xData.append(it->value);
+        yData.append(it->key);
     }
     saveData(fileName, xData, yData);
 }
@@ -187,7 +187,7 @@ void MainWindow::loadData(const QString &fileName)
             }
         }
         file.close();
-        customPlot->graph(0)->setData(xData, yData);
+        customPlot->graph(0)->setData(yData, xData);
         customPlot->replot();
     }
 }
